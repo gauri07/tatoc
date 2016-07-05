@@ -1,0 +1,1682 @@
+database: sql08dev1.dom1.mms.org
+data_file: ./testdata/test_data.xlsx
+timeout: 190000
+
+sheets:
+  Register:
+    keep_original: true    #set this as true if you do not want new data from db for this component
+  
+  Register_2:
+    keep_original: true    #set this as true if you do not want new data from db for this component
+    headers:
+      db_headers:
+        - NejmUserStatusCd
+        - EmailAddr
+      test_data_headers:
+        - nejm_user_status_code
+        - email_address
+    queries:
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter'"
+        data_tags: "ActiveBarterRegister"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub'"
+        data_tags: "ActivePaidSubRegister"
+    backed_columns:
+      -
+        header: password
+        value: q@nejm1812
+  Renew:
+    #keep_original: true   #set this as true if you do not want new data from db for this component
+    headers:
+      db_headers:
+        - NejmUserStatusCd
+        - EmailAddr
+        - SubTypeDesc
+        - FirstName
+        - LastName
+        - PrimarySpecialityDesc
+        - WorkPlaceDesc
+        - ProfessionTypeDesc
+        - MmsCustNum
+        - CountryName
+      test_data_headers:
+        - nejm_user_status_code
+        - email_address
+        - professional_category
+        - first_name
+        - last_name
+        - specialty
+        - place_of_work_or_study
+        - profession
+        - customer_number
+        - country_region
+    queries:
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd = 'PHY' and CapStepUp = 'Y' and NOT EmailAddr='' and NejmRequalifiedInd = 'Y' and RN_FLG='Y' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-Phy-USA-rY-cY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd = 'RES' and CapStepUp = 'N' and NOT EmailAddr='' and NejmRequalifiedInd = 'Y' and CountryCd = 'USA' and WorkPlaceCd is NOT null and WorkPlaceDesc is NOT null and RN_FLG='Y' and PrimarySpecialityDesc is NOT null and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-Res-USA-rY-cN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd = 'STU' and CapStepUp = 'Y' and NOT EmailAddr='' and NejmRequalifiedInd = 'N' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-Stu-USA-rN-cY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd = 'OTH' and CapStepUp = 'N' and NOT EmailAddr='' and NejmRequalifiedInd = 'N' and RN_FLG='Y' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-Oth-USA-rN-cN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidNotActivatedSub' and SubTypeCd = 'PHY' and CapStepUp = 'Y' and NOT EmailAddr='' and CountryCd = 'USA' and NOT EmailAddr='' and RN_FLG='Y' and StateCd is not null and QaLead is null"
+        # data_tags: "ActivePaidNotActivatedSub-Phy-USA-cY"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidNotActivatedSub' and SubTypeCd = 'RES' and CapStepUp = 'N' and NOT EmailAddr='' and RN_FLG='Y' and CountryCd = 'USA' and QaLead is null"
+        data_tags: "ActivePaidNotActivatedSub-Res-USA-cN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveAgentPaidActivatedSub' and SubTypeCd = 'PHY' and CapStepUp = 'Y' and NOT EmailAddr='' and NejmRequalifiedInd = 'Y' and RN_FLG='Y' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "ActiveAgentPaidActivatedSub-Phy-USA-rY-cN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveAgentPaidActivatedSub' and SubTypeCd = 'RES' and CapStepUp = 'N' and NOT EmailAddr='' and NejmRequalifiedInd = 'Y' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "ActiveAgentPaidActivatedSub-Res-USA-rY-cN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveAgentPaidActivatedSub' and SubTypeCd = 'STU' and CapStepUp = 'Y' and NejmRequalifiedInd = 'N' and NOT EmailAddr='' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "ActiveAgentPaidActivatedSub-Stu-USA-rN-cY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveAgentPaidActivatedSub' and SubTypeCd = 'OTH' and CapStepUp = 'N' and NejmRequalifiedInd = 'N' and NOT EmailAddr='' and CountryCd = 'USA' and RN_FLG='Y' and QaLead is null"
+        # data_tags: "ActiveAgentPaidActivatedSub-Oth-USA-rN-cN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompRegularActivatedSub' and SubTypeCd = 'PHY' and CapStepUp = 'Y' and NejmRequalifiedInd = 'Y' and NOT EmailAddr='' and CountryCd = 'USA' and RN_FLG='Y' and QaLead is null"
+        # data_tags: "ActiveFreeCompRegularActivatedSub-Phy-USA-rY-cY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompRegularActivatedSub' and SubTypeCd = 'RES' and CapStepUp = 'N' and NejmRequalifiedInd = 'Y' and NOT EmailAddr='' and CountryCd = 'USA' and RN_FLG='Y' and QaLead is null"
+        # data_tags: "ActiveFreeCompRegularActivatedSub-Res-USA-rY-cN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompRegularActivatedSub' and SubTypeCd = 'STU' and CapStepUp = 'Y' and NejmRequalifiedInd = 'N' and NOT EmailAddr='' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "ActiveFreeCompRegularActivatedSub-Stu-USA-rN-cY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompRegularActivatedSub' and SubTypeCd = 'OTH' and CapStepUp = 'N' and NejmRequalifiedInd = 'N' and NOT EmailAddr='' and RN_FLG='Y' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "ActiveFreeCompRegularActivatedSub-Oth-USA-rN-cN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveCancelCustomerRequestSub' and SubTypeCd = 'PHY' and CapStepUp = 'Y' and NejmRequalifiedInd = 'Y' and NOT EmailAddr='' and CountryCd = 'USA' and RN_FLG='Y' and QaLead is null"
+        # data_tags: "InActiveCancelCustomerRequestSub-Phy-USA-rY-cY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveCancelCustomerRequestSub' and SubTypeCd = 'RES' and CapStepUp = 'N' and NejmRequalifiedInd = 'Y' and NOT EmailAddr='' and CountryCd = 'USA' and MmsMemberInd = 'N' and RN_FLG='Y' and QaLead is null"
+        # data_tags: "InActiveCancelCustomerRequestSub-Res-USA-rY-cN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveCancelCustomerRequestSub' and SubTypeCd = 'STU' and CapStepUp = 'Y' and NejmRequalifiedInd = 'N' and NOT EmailAddr='' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "InActiveCancelCustomerRequestSub-Stu-USA-rN-cY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveCancelCustomerRequestSub' and SubTypeCd = 'OTH' and CapStepUp = 'N' and NejmRequalifiedInd = 'N' and NOT EmailAddr='' and CountryCd = 'USA' and RN_FLG='Y' and QaLead is null"
+        # data_tags: "InActiveCancelCustomerRequestSub-Oth-USA-rN-cN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveCancelNonPayRegularSub' and SubTypeCd = 'PHY' and CapStepUp = 'Y' and NejmRequalifiedInd = 'Y' and NOT EmailAddr='' and RN_FLG = 'Y' and QaLead is null"
+        # data_tags: "InActiveCancelNonPayRegularSub-Phy-USA-rY-cY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveCancelNonPayRegularSub' and SubTypeCd = 'RES' and CapStepUp = 'N' and NejmRequalifiedInd = 'Y' and NOT EmailAddr='' and CountryCd = 'USA' and RN_FLG='Y' and QaLead is null"
+        # data_tags: "InActiveCancelNonPayRegularSub-Res-USA-rY-cN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveCancelNonPayRegularSub' and SubTypeCd = 'STU' and CapStepUp = 'Y' and NejmRequalifiedInd = 'N' and NOT EmailAddr='' and CountryCd = 'USA' and WorkPlaceDesc is NOT null and QaLead is null"
+        # data_tags: "InActiveCancelNonPayRegularSub-Stu-USA-rN-cY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveCancelNonPayRegularSub' and SubTypeCd = 'OTH' and CapStepUp = 'N' and NejmRequalifiedInd = 'N' and NOT EmailAddr='' and CountryCd = 'USA' and ProfessionTypeDesc is NOT null and WorkPlaceDesc is NOT null and RN_FLG='Y' and QaLead is null and MmsCustNum!=''"
+        # data_tags: "InActiveCancelNonPayRegularSub-Oth-USA-rN-cN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredCompRegularSub' and SubTypeCd = 'PHY' and CapStepUp = 'Y' and NejmRequalifiedInd = 'Y' and NOT EmailAddr='' and CountryCd = 'USA' and MmsMemberInd = 'N' and RN_FLG='Y' and QaLead is null"
+        # data_tags: "InActiveExpiredCompRegularSub-Phy-USA-rY-cY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredCompRegularSub' and SubTypeCd = 'RES' and CapStepUp = 'N' and NejmRequalifiedInd = 'Y' and NOT EmailAddr='' and CountryCd = 'USA' and MmsMemberInd = 'N' and RN_FLG='Y' and QaLead is null"
+        # data_tags: "InActiveExpiredCompRegularSub-Res-USA-rY-cN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredCompRegularSub' and SubTypeCd = 'STU' and CapStepUp = 'Y' and NejmRequalifiedInd = 'N' and NOT EmailAddr='' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "InActiveExpiredCompRegularSub-Stu-USA-rN-cY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredCompRegularSub' and SubTypeCd = 'OTH' and CapStepUp = 'N' and NejmRequalifiedInd = 'N' and NOT EmailAddr='' and CountryCd = 'USA' and RN_FLG='Y' and QaLead is null"
+        # data_tags: "InActiveExpiredCompRegularSub-Oth-USA-rN-cN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredCompSponsoredWithWebAccessSub' and SubTypeCd = 'PHY' and CapStepUp = 'Y' and NejmRequalifiedInd = 'Y' and NOT EmailAddr='' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "InActiveExpiredCompSponsoredWithWebAccessSub-Phy-USA-rY-cY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredCompSponsoredWithWebAccessSub' and SubTypeCd = 'RES' and CapStepUp = 'N' and NejmRequalifiedInd = 'Y' and NOT EmailAddr='' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "InActiveExpiredCompSponsoredWithWebAccessSub-Res-USA-rY-cN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredCompSponsoredWithWebAccessSub' and SubTypeCd = 'STU' and CapStepUp = 'Y' and NejmRequalifiedInd = 'N' and NOT EmailAddr='' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "InActiveExpiredCompSponsoredWithWebAccessSub-Stu-USA-rN-cY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredCompSponsoredWithWebAccessSub' and SubTypeCd = 'OTH' and CapStepUp = 'N' and NejmRequalifiedInd = 'N' and NOT EmailAddr='' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "InActiveExpiredCompSponsoredWithWebAccessSub-Oth-USA-rN-cN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredPaidSubscriberSub' and SubTypeCd = 'PHY' and CapStepUp = 'Y' and NejmRequalifiedInd = 'Y' and NOT EmailAddr='' and CountryCd = 'USA' and RN_FLG='Y' and QaLead is null"
+        # data_tags: "InActiveExpiredPaidSubscriberSub-Phy-USA-rY-cY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredPaidSubscriberSub' and SubTypeCd = 'RES' and CapStepUp = 'N' and NejmRequalifiedInd = 'Y' and NOT EmailAddr='' and CountryCd = 'USA' and RN_FLG='Y' and QaLead is null"
+        # data_tags: "InActiveExpiredPaidSubscriberSub-Res-USA-rY-cN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredPaidSubscriberSub' and SubTypeCd = 'STU' and CapStepUp = 'Y' and NejmRequalifiedInd = 'N' and NOT EmailAddr='' and CountryCd = 'USA' and RN_FLG='Y' and QaLead is null"
+        # data_tags: "InActiveExpiredPaidSubscriberSub-Stu-USA-rN-cY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredPaidSubscriberSub' and SubTypeCd = 'OTH' and CapStepUp = 'N' and NejmRequalifiedInd = 'N' and NOT EmailAddr='' and CountryCd = 'USA' and ProfessionTypeDesc is NOT null and WorkPlaceDesc is NOT null and RN_FLG='Y' and QaLead is null"
+        # data_tags: "InActiveExpiredPaidSubscriberSub-Oth-USA-rN-cN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd IN ('ActivePaidActivatedSub', 'ActivePaidNotActivatedSub', 'ActiveAgentPaidActivatedSub', 'ActiveFreeCompRegularActivatedSub', 'InActiveCancelCustomerRequestSub', 'InActiveCancelNonPayRegularSub', 'InActiveExpiredCompRegularSub', 'InActiveExpiredCompSponsoredWithWebAccessSub', 'InActiveExpiredPaidSubscriberSub') and CapStepUp = 'Y' and SubTypeCd IN ('PHY','RES') and CountryCd = 'USA' and RN_FLG='Y' and NOT EmailAddr='' and QaLead is null"
+        # data_tags: "NEJMAINT-7889"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd IN ('ActivePaidActivatedSub', 'ActivePaidNotActivatedSub', 'ActiveAgentPaidActivatedSub', 'ActiveFreeCompRegularActivatedSub', 'InActiveCancelCustomerRequestSub', 'InActiveCancelNonPayRegularSub', 'InActiveExpiredCompRegularSub', 'InActiveExpiredCompSponsoredWithWebAccessSub', 'InActiveExpiredPaidSubscriberSub') and CapStepUp = 'N' and NOT EmailAddr='' and SubTypeCd = 'STU' and CountryCd='USA' and RN_FLG='Y' and QaLead is null"
+        # data_tags: "NEJMAINT-7890"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd IN ('ActivePaidActivatedSub', 'ActiveFreeCompRegularActivatedSub') and CapStepUp = 'Y' and SubTypeCd IN ('PHY','RES') and  CountryCd='USA' and RN_FLG='Y' and NOT EmailAddr='' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub_ActiveFreeCompRegularActivatedSub-Phy_Res-USA-cY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd IN ('ActivePaidActivatedSub', 'ActiveFreeCompRegularActivatedSub') and CapStepUp = 'N' and SubTypeCd = 'STU' and CountryCd='USA' and NOT EmailAddr='' and RN_FLG='Y' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub_ActiveFreeCompRegularActivatedSub-Stu-USA-cY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredPaidSubscriberSub' and ExpireDate < GETDATE() and ExpireDate > (GETDATE() - 180) and SubTypeCd = 'OTH' and CountryCd='USA' and NOT EmailAddr='' and RN_FLG='Y' and QaLead is null"
+        # data_tags: "InActiveExpiredPaidSubscriberSub-Oth-USA-expire_6_months"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompLifetimeActivatedSub' and NOT EmailAddr=''"
+        # data_tags: "ActiveFreeCompLifetimeActivatedSub"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompMediaActivatedSub' and NOT EmailAddr=''"
+        # data_tags: "ActiveFreeCompMediaActivatedSub"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidMediaActivatedSub' and NOT EmailAddr=''"
+        # data_tags: "ActivePaidMediaActivatedSub"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompMmsMemberActivatedSub' and NOT EmailAddr=''"
+        # data_tags: "ActiveFreeCompMmsMemberActivatedSub"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreePerpetualNotMmsMemberSubActivated' and NOT EmailAddr=''"
+        # data_tags: "ActiveFreePerpetualNotMmsMemberSubActivated"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and NOT EmailAddr=''"
+        # data_tags: "InActiveBillingSuspendSub"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and NOT EmailAddr='' and QaLead is null"
+        # data_tags: "InActiveBillingSuspendSub_NEJMAINT-7899"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveOpenCreditActivatedSub' and NOT EmailAddr=''"
+        # data_tags: "ActiveOpenCreditActivatedSub"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidUnpaidFutureStartSub' and NOT EmailAddr='' and RN_FLG='Y'"
+        # data_tags: "ActivePaidUnpaidFutureStartSub"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveTemporarySuspendSub' and NOT EmailAddr=''"
+        # data_tags: "InActiveTemporarySuspendSub"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveUndeliverableSub' and NOT EmailAddr=''"
+        # data_tags: "InActiveUndeliverableSub"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd IN ('ActivePaidActivatedSub', 'ActiveFreeCompRegularActivatedSub') and CapStepUp = 'N' and RN_FLG='Y' and CountryName IN ('AUSTRIA','BELGIUM','GERMANY','DENMARK','GREECE','SPAIN','FRANCE','UNITED KINGDOM','IRELAND','ITALY','NETHERLANDS','PORTUGAL','SWEDEN') and SubTypeCd = 'STU' and NOT EmailAddr='' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub_ActiveFreeCompRegularActivatedSub-Stu-VAT-cN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredCompRegularSub' and CapStepUp = 'N' and NejmRequalifiedInd = 'Y' and NOT EmailAddr='' and CountryName = 'CANADA' and RN_FLG='Y' and SubTypeCd = 'RES' and QaLead is null"
+        # data_tags: "InActiveExpiredCompRegularSub-Res-CAN-rY-cN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidNotActivatedSub' and CapStepUp = 'Y' and NOT MmsCustNum = '' and CountryName NOT IN ('AUSTRIA','BELGIUM','GERMANY','DENMARK','GREECE','SPAIN','FRANCE','UNITED KINGDOM','IRELAND','ITALY','NETHERLANDS','PORTUGAL','SWEDEN','UNITED STATES','CANADA') and SubTypeCd = 'PHY' and NOT EmailAddr='' and QaLead is null"
+        # data_tags: "ActivePaidNotActivatedSub-Phy-nonUS_nonCAN_nonVAT-cY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidNotActivatedSub' and CountryCd = 'CAN' and EmailAddr LIKE '%'+'.com' and NOT MmsCustNum='' and  SubTypeCd IN ('PHY','RES') and RN_FLG='Y' and QaLead is null"
+        # data_tags: "ActivePaidNotActivatedSub-CAN-eN-9171" 
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidNotActivatedSub' and  CountryCd='CAN' and NOT EmailAddr like '%'+'.ca' and NOT MmsCustNum='' and  SubTypeCd IN ('PHY','RES') and RN_FLG='Y' and QaLead is null"
+        # data_tags: "ActivePaidNotActivatedSub-CAN-eN-9170"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidNotActivatedSub' and CountryName IN ('AUSTRIA','BELGIUM','GERMANY','DENMARK','GREECE','SPAIN','FRANCE') and EmailAddr='' and NOT MmsCustNum='' and  SubTypeCd IN ('PHY','RES') and RN_FLG='Y' and QaLead is null"
+        # data_tags: "ActivePaidNotActivatedSub-CAN-eN-9175" 
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidNotActivatedSub' and  CountryCd='CAN' and EmailAddr='' and NOT MmsCustNum='' and  SubTypeCd IN ('PHY','RES') and RN_FLG='Y' and QaLead is null"
+        # data_tags: "ActivePaidNotActivatedSub-CAN-eN-9169" 
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidNotActivatedSub' and  CountryCd='CAN' and EmailAddr='' and NOT MmsCustNum='' and  SubTypeCd IN ('PHY','RES') and QaLead is null"
+        # data_tags: "ActivePaidNotActivatedSub-CAN-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidNotActivatedSub' and  CountryCd='CAN' and EmailAddr='' and NOT MmsCustNum=''  and RN_FLG='Y' and QaLead is null"
+        # data_tags: "ActivePaidNotActivatedSub-CAN-eN-9168"  
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidNotActivatedSub' and  CountryCd='USA' and EmailAddr='' and RN_FLG='Y' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "ActivePaidNotActivatedSub-USA-e.ca-NEJMAINT-9172"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidNotActivatedSub' and  CountryCd='USA' and EmailAddr='' and NOT MmsCustNum='' and ActivationStatus='N'  and RN_FLG='Y' and QaLead is null"
+        # data_tags: "ActivePaidNotActivatedSub-USA-e.ca-NEJMAINT-9173"
+    backed_columns:
+      -
+        header: password
+        value: q@nejm1812
+      -
+        header: id
+        value: "[TIMESTAMP]"
+
+  CME_NewSubscriberData:
+    keep_original: true   #set this as true if you do not want new data from db for this component
+    backed_columns:
+      -
+        header: password
+        value: q@nejm1812
+      -
+        header: id
+        value: "[TIMESTAMP]"
+
+  CME:
+    keep_original: true   #set this as true if you do not want new data from db for this component
+    headers:
+      db_headers:
+        - NejmUserStatusCd
+        - EmailAddr
+        - SubTypeDesc
+        - FirstName
+        - LastName
+        - PrimarySpecialityDesc
+        - WorkPlaceDesc
+        - ProfessionTypeDesc
+        - MmsCustNum
+        - CountryName
+        - CompanyName
+        - AddrLine1
+        - AddrLine2
+        - City
+        - PostalCd
+        - StateName
+        - PostalCd
+      test_data_headers:
+        - nejm_user_status_code
+        - email_address
+        - professional_category
+        - first_name
+        - last_name
+        - specialty
+        - place_of_work_or_study
+        - profession
+        - customer_number
+        - country_or_region
+        - company_name
+        - address_1
+        - address_2
+        - city
+        - postal_code
+        - state
+        - zip_code
+        
+    queries:
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and NOT EmailAddr=''"
+        data_tags: "ActiveBarter"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and NOT EmailAddr=''"
+        data_tags: "ActivePaidActivatedSub"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InactiveBillingSuspendSub' and NOT EmailAddr='' and QaLead is null"
+        data_tags: "InactiveBillingSuspendSub"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveOpenCreditActivatedSub' and NOT EmailAddr=''"
+        data_tags: "ActiveOpenCreditActivatedSub"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InactiveExpiredPaidSubscriberSub' and NOT EmailAddr='' and (FinalExpireDate < GETDATE()) and (FinalExpireDate > (GETDATE() - 180))"
+        data_tags: "InactiveExpiredPaidSubscriberSub-expire_6_months"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and NOT EmailAddr=''"
+        data_tags: "ActivePaidActivatedSub_1"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and NOT EmailAddr='' and QaLead is null"
+        data_tags: "ActivePaidActivatedSub_2"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and NOT EmailAddr='' and QaLead is null"
+        data_tags: "ActivePaidActivatedSub_3"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and NOT EmailAddr='' and QaLead is null"
+        data_tags: "ActivePaidActivatedSub_4"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and NOT EmailAddr='' and QaLead is null"
+        data_tags: "ActivePaidActivatedSub_5"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and NOT EmailAddr='' and QaLead is null"
+        data_tags: "ActivePaidActivatedSub_6"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and NOT EmailAddr=''"
+        data_tags: "ActivePaidActivatedSub_7"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and NOT EmailAddr='' and NOT EmailAddr='' and QaLead is null"
+        data_tags: "ActivePaidActivatedSub_8"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and NOT EmailAddr='' and QaLead is null"
+        data_tags: "ActivePaidActivatedSub_9"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and NOT EmailAddr='' and QaLead is null"
+        data_tags: "ActivePaidActivatedSub_10"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredPaidSubscriberSub' and FinalExpireDate < GETDATE() and FinalExpireDate < (GETDATE() - 180) and NOT EmailAddr='' and QaLead is null"
+        data_tags: "InActiveExpiredPaidSubscriberSub_ExpiredMoreThan6MonthsAgo"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredPaidSubscriberSub' and FinalExpireDate < GETDATE() and FinalExpireDate > (GETDATE() - 180) and NOT EmailAddr=''"
+        data_tags: "InActiveExpiredPaidSubscriberSub_ExpiredLessThan6MonthsAgo"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveCancelCustomerRequestSub' and NOT EmailAddr='' and QaLead is null"
+        data_tags: "InActiveCancelCustomerRequestSub"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidUnpaidFutureStartSub' and NOT EmailAddr='' and QaLead is null"
+        data_tags: "ActivePaidUnpaidFutureStartSub"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveBillingSuspendSub' and NOT EmailAddr=''"
+        data_tags: "InActiveBillingSuspendSub"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveOpenCreditActivatedSub' and NOT EmailAddr='' and QaLead is null"
+        data_tags: "ActiveOpenCreditActivatedSub"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveFreeCompMediaActivatedSub' and NOT EmailAddr='' and QaLead is null"
+        data_tags: "ActiveFreeCompMediaActivatedSub"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveBarter' and SubTypeCd='PHY' and  CountryName IN ('AUSTRIA','BELGIUM','GERMANY','DENMARK','GREECE','SPAIN','FRANCE','UNITED KINGDOM','IRELAND','ITALY','NETHERLANDS','PORTUGAL','SWEDEN')  and NOT EmailAddr='' and QaLead is null"
+        data_tags: "ActiveBarter-Phy-VAT"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd='STU' and CountryCd='USA' and NOT EmailAddr='' and QaLead is null"
+        data_tags: "ActivePaidActivatedSub-Stu-USA"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveExpiredPaidSubscriberSub' and SubTypeCd='PHY' and CountryCd='USA' and NOT EmailAddr='' and WorkPlaceDesc is NOT null and QaLead is null"
+        data_tags: "InActiveExpiredPaidSubscriberSub-Phy-USA"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and NOT EmailAddr='' and QaLead is null"
+        data_tags: "ActivePaidActivatedSub_11"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd='PHY' and CountryCd='USA' and NOT EmailAddr=''"
+        data_tags: "ActivePaidActivatedSub-Phy-USA"
+    backed_columns:
+      -
+        header: password
+        value: q@nejm1812
+
+  Activate:
+    #keep_original: true   #set this as true if you do not want new data from db for this component
+    headers:
+      db_headers:
+        - NejmUserStatusCd
+        - EmailAddr
+        - SubTypeDesc
+        - FirstName
+        - LastName
+        - PrimarySpecialityDesc
+        - WorkPlaceDesc
+        - ProfessionTypeDesc
+        - MmsCustNum
+        - CountryName
+        - PostalCd
+        - PostalCd
+      test_data_headers:
+        - nejm_user_status_code
+        - email_address
+        - professional_category
+        - first_name
+        - last_name
+        - specialty
+        - place_of_work_or_study
+        - profession
+        - customer_number
+        - country_region
+        - postal_code
+        - zip_code
+        
+    queries:
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveBarter' and  SubTypeCd IN ('PHY','RES') and NOT EmailAddr='' and WebAccess is null and WorkPlaceDesc is NOT null and PrimarySpecialityDesc is NOT null and MmsCustNum is NOT null and QaLead is null"
+        # data_tags: "Active Barter-Phy_Res-eY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveAgentPaidActivatedSub' and NOT EmailAddr=''"
+        # data_tags: "ActiveAgentPaidActivatedSub-eY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveAgentPaidNotActivatedSub' and  SubTypeCd = 'STU' and (EmailAddr='' or EmailAddr is null) and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "ActiveAgentPaidNotActivatedSub-Stu-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveExclusiveAgentPaidActivatedSub' and NOT EmailAddr=''"
+        # data_tags: "ActiveExclusiveAgentPaidActivatedSub-eY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveExclusiveAgentPaidNotActivatedSub' and  SubTypeCd = 'OTH' and CountryName='CHINA' and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "ActiveExclusiveAgentPaidNotActivatedSub-Oth-CHN-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveExclusiveAgentPaidNotActivatedSub' and  SubTypeCd IN ('PHY','RES') and CountryCd='HKG' and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "ActiveExclusiveAgentPaidNotActivatedSub-Phy_Res-HKG-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveExclusiveAgentPaidNotActivatedSub' and  SubTypeCd IN ('PHY','RES') and CountryCd='JPN' and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "ActiveExclusiveAgentPaidNotActivatedSub-Phy_Res-JPN-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveExclusiveAgentPaidNotActivatedSub' and  SubTypeCd = 'STU' and CountryName='KOREA (SOUTH)' and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "ActiveExclusiveAgentPaidNotActivatedSub-Stu-KOR-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveFreeCompLifetimeActivatedSub' and NOT EmailAddr=''"
+        # data_tags: "ActiveFreeCompLifetimeActivatedSub-eY"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveFreeCompLifetimeNotActivatedSub' and  SubTypeCd = 'OTH' and EmailAddr='' and NOT MmsCustNum='' and ActivationStatus='N' and QaLead is null"
+        data_tags: "ActiveFreeCompLifetimeNotActivatedSub-Oth-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveFreeCompMediaActivatedSub' and NOT EmailAddr=''"
+        # data_tags: "ActiveFreeCompMediaActivatedSub-eY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveFreeCompMediaNotActivatedSub' and  SubTypeCd = 'OTH'  and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "ActiveFreeCompMediaNotActivatedSub-Oth-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveFreeCompMediaNotActivatedSub' and  SubTypeCd = 'OTH'  and EmailAddr='' and NOT MmsCustNum='' and ActivationStatus='N'  and QaLead is null"
+        # data_tags: "ActiveFreeCompMediaNotActivatedSub-Oth-eN-NEJMAINT-7676"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveFreeCompMmsMemberActivatedSub' and NOT EmailAddr=''"
+        # data_tags: "ActiveFreeCompMmsMemberActivatedSub-eY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveFreeCompMmsMemberNotActivatedSub' and SubTypeCd IN ('PHY','RES') and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "ActiveFreeCompMmsMemberNotActivatedSub-Phy_Res-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveFreeCompMmsMemberNotActivatedSub' and SubTypeCd IN ('PHY','RES') and EmailAddr='' and NOT MmsCustNum='' and ActivationStatus='N' and QaLead is null"
+        # data_tags: "ActiveFreeCompMmsMemberNotActivatedSub-Phy_Res-eN-7670"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveFreeCompRegularActivatedSub' and NOT EmailAddr=''"
+        # data_tags: "ActiveFreeCompRegularActivatedSub-eY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveFreeCompRegularNotActivatedSub' and  SubTypeCd = 'OTH' and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "ActiveFreeCompRegularNotActivatedSub-Oth-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveFreeCompSponsoredWithoutWebAccessSub' and NOT EmailAddr=''"
+        # data_tags: "ActiveFreeCompSponsoredWithoutWebAccessSub-eY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveFreeCompSponsoredWithWebAccessNotActivatedSub' and  SubTypeCd IN ('PHY','RES') and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "ActiveFreeCompSponsoredWithWebAccessNotActivatedSub-Phy_Res-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveFreePerpetualNotMmsMemberSubActivated' and NOT EmailAddr=''"
+        # data_tags: "ActiveFreePerpetualNotMmsMemberSubActivated-eY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveFreePerpetualNotMmsMemberSubNotActivated' and  SubTypeCd = 'OTH' and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "ActiveFreePerpetualNotMmsMemberSubNotActivated-Oth-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveFreePerpetualNotMmsMemberSubNotActivated' and  SubTypeCd = 'PHY' and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "ActiveFreePerpetualNotMmsMemberSubNotActivated-Phy-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveOpenCreditActivatedSub' and NOT EmailAddr=''"
+        # data_tags: "ActiveOpenCreditActivatedSub-eY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveOpenCreditNotActivatedSub' and  SubTypeCd IN ('PHY','RES') and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "ActiveOpenCreditNotActivatedSub-Phy_Res-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveOpenCreditNotActivatedSub' and  SubTypeCd IN ('PHY','RES') and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "ActiveOpenCreditNotActivatedSub-Phy_Res-eN-01"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and NOT EmailAddr='' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-eY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidMediaActivatedSub'"
+        # data_tags: "ActivePaidMediaActivatedSub-rN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidMediaNotActivatedSub' and  SubTypeCd = 'OTH' and (EmailAddr='' or EmailAddr is null) and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "ActivePaidMediaNotActivatedSub-Oth-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidNotActivatedSub' and  SubTypeCd = 'OTH' and EmailAddr='' and NOT MmsCustNum='' and ActivationStatus='N' and QaLead is null"
+        # data_tags: "ActivePaidNotActivatedSub-Oth-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidNotActivatedSub' and  SubTypeCd ='OTH' and CountryName NOT IN ('JAPAN','CHINA','KOREA(SOUTH)') and EmailAddr='' and NOT MmsCustNum='' and ProfessionTypeDesc is NOT null  and QaLead is null"
+        # data_tags: "ActivePaidNotActivatedSub-Oth-NOT_KOR_JAP_CHN-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = ' ActivePaidNotActivatedSub' and  SubTypeCd IN ('PHY','RES') and CountryName NOT IN ('JAPAN','CHINA','KOREA(SOUTH)') and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "ActivePaidNotActivatedSub-Phy_Res-NOT_KOR_JAP_CHN-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidNotActivatedSub' and  SubTypeCd ='PHY' and EmailAddr='' and NOT MmsCustNum=''  and ActivationStatus='N' and QaLead is null"
+        # data_tags: "ActivePaidNotActivatedSub-Phy-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidNotActivatedSub' and  SubTypeCd ='RES' and EmailAddr='' and NOT MmsCustNum=''  and ActivationStatus='N' and QaLead is null"
+        # data_tags: "ActivePaidNotActivatedSub-Res-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidNotActivatedSub' and  SubTypeCd = 'STU' and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "ActivePaidNotActivatedSub-Stu-eN-NEJMAINT-7692"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidNotActivatedSub' and  SubTypeCd = 'STU' and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "ActivePaidNotActivatedSub-Stu-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidNotActivatedSub' and  SubTypeCd = 'STU' and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "ActivePaidNotActivatedSub-Stu-eN-NEJMAINT-7664"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidNotActivatedSub' and  SubTypeCd ='STU' and CountryName NOT IN ('JAPAN','CHINA','KOREA(SOUTH)') and EmailAddr='' and NOT MmsCustNum='' and WorkPlaceDesc is NOT null and QaLead is null"
+        # data_tags: "ActivePaidNotActivatedSub-Stu-NOT_KOR_JAP_CHN-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidUnpaidFutureStartSub' and NOT EmailAddr=''"
+        # data_tags: "ActivePaidUnpaidFutureStartSub-eY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidUnpaidFutureStartSub' and  SubTypeCd = 'OTH' and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "ActivePaidUnpaidFutureStartSub-Oth-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidUnpaidFutureStartSub' and  SubTypeCd IN ('PHY','RES') and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "ActivePaidUnpaidFutureStartSub-Phy_Res-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveUndeliverableSub' and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "InActiveUndeliverableSub-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveTemporarySuspendSub'"
+        # data_tags: "InActiveTemporarySuspendSub"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveIndefiniteSuspendPaidNonPaidSub' and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "InActiveIndefiniteSuspendPaidNonPaidSub-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveExpiredPaidSubscriberSub' and CountryName NOT IN ('JAPAN','CHINA') and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "InActiveExpiredPaidSubscriberSub-NOT_KOR_JAP_CHN-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveExpiredCompSponsoredWithWebAccessSub' and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "InActiveExpiredCompSponsoredWithWebAccessSub-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveExpiredCompSponsoredWithoutWebAccessSub' and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "InActiveExpiredCompSponsoredWithoutWebAccessSub-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveExpiredCompRegularSub' and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "InActiveExpiredCompRegularSub-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveExpiredCompMediaSub' and EmailAddr='' and NOT MmsCustNum=''  and QaLead is null"
+        # data_tags: "InActiveExpiredCompMediaSub-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveExpiredCompMediaSub'"
+        # data_tags: "InActiveExpiredCompMediaSub"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveCancelNonPayRegularSub' and EmailAddr='' and NOT MmsCustNum=''  and NOT MmsCustNum='' and ActivationStatus='N' and QaLead is null"
+        # data_tags: "InActiveCancelNonPayRegularSub-eN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveCancelCustomerRequestSub' and NOT EmailAddr=''"
+        # data_tags: "InActiveCancelCustomerRequestSub-eY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveBillingSuspendSub' and NOT EmailAddr=''"
+        # data_tags: "InActiveBillingSuspendSub-eY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidMediaActivatedSub'"
+        # data_tags: "ActivePaidMediaActivatedSub"  
+    backed_columns:
+      -
+        header: password
+        value: q@nejm1812
+        
+  Subscribe:
+    keep_original: true   #set this as true if you do not want new data from db for this component
+    backed_columns:
+      -
+        header: password
+        value: q@nejm1812
+      -
+        header: id
+        value: "[TIMESTAMP]"
+        
+  Subscribe_Existing_User:
+    #keep_original: true   #set this as true if you do not want new data from db for this component   
+    headers:
+      db_headers:
+        - NejmUserStatusCd
+        - EmailAddr
+        - SubTypeDesc
+        - FirstName
+        - LastName
+        - PrimarySpecialityDesc
+        - WorkPlaceDesc
+        - ProfessionTypeDesc
+        - MmsCustNum
+        - CountryName
+        - PostalCd
+        - PostalCd
+        - AddrLine1
+        - City
+        - StateName
+            
+      test_data_headers:
+        - nejm_user_status_code
+        - email_address
+        - professional_category
+        - first_name
+        - last_name
+        - specialty
+        - place_of_work_or_study
+        - profession
+        - customer_number
+        - country_or_region
+        - postal_code
+        - zip_code
+        - address_1
+        - city
+        - state
+        
+    queries:
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and CountryName='United States' and NejmRequalifiedInd = 'N' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-Phy-USA-rN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where SubTypeCd='PHY' and CountryName='United States' and NejmRequalifiedInd = 'Y' and QaLead is null"
+        # data_tags: "Physician-USA-rY"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and SubTypeCd='PHY' and CountryName='United States' and NejmRequalifiedInd = 'N' and QaLead is null"
+        data_tags: "ActiveBarter-Physician-USA-rN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredPaidSubscriberSub' and SubTypeCd='PHY' and ExpireDate < GETDATE() and ExpireDate > (GETDATE() - 180) and QaLead is null"
+        # data_tags: "InActiveExpiredPaidSubscriberSub-Physician-finalExpireDate>6months"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompMmsMemberActivatedSub'"
+        # data_tags: "ActiveFreeCompMmsMemberActivatedSub"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompMmsMemberNotActivatedSub'"
+        # data_tags: "ActiveFreeCompMmsMemberNotActivatedSub"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompLifetimeActivatedSub' and StateCd!='' and CountryCd='USA'"
+        # data_tags: "ActiveFreeCompLifetimeActivatedSub"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreePerpetualNotMmsMemberSubActivated'"
+        # data_tags: "ActiveFreePerpetualNotMmsMemberSubActivated"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and not EmailAddr='' and QaLead is null"
+        # data_tags: "InActiveBillingSuspendSub"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveOpenCreditActivatedSub'"
+        # data_tags: "ActiveOpenCreditActivatedSub"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidUnpaidFutureStartSub' and QaLead is null"
+        # data_tags: "ActivePaidUnpaidFutureStartSub"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveIndefiniteSuspendPaidNonPaidSub'"
+        # data_tags: "InActiveIndefiniteSuspendPaidNonPaidSub"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveUndeliverableSub' and NejmRequalifiedInd = 'N' and QaLead is null"
+        # data_tags: "InActiveUndeliverableSub-rN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompMediaActivatedSub'"
+        # data_tags: "ActiveFreeCompMediaActivatedSub"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidMediaActivatedSub' and NejmRequalifiedInd = 'N'"
+        # data_tags: "ActivePaidMediaActivatedSub-rN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveTemporarySuspendSub'"
+        # data_tags: "InActiveTemporarySuspendSub"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='CANADA' and SubTypeCd= 'PHY' and QaLead is null"
+        # data_tags: "ActiveBarter-Physician-CAN-ONJ"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredPaidSubscriberSub' and CountryName = 'MEXICO' and SubTypeCd = 'PHY' and NejmRequalifiedInd = 'N' and QaLead is null"
+        # data_tags: "InActiveExpiredPaidSubscriberSub-Physician-MEX-rN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredPaidSubscriberSub' and CountryName = 'CANADA' and SubTypeCd = 'PHY' and ProductCd = 'ONJ' and QaLead is null"
+        # data_tags: "InActiveExpiredPaidSubscriberSub-Physician-CAN-ONJ"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='United States' and NejmRequalifiedInd = 'N' and WorkPlaceDesc is NOT null and PrimarySpecialityDesc is NOT null and PostalCd!='' and not EmailAddr='' and QaLead is null"
+        # data_tags: "ActiveBarter-rN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredPaidSubscriberSub' and NejmRequalifiedInd = 'N' and WorkPlaceDesc is NOT null and CountryName='United States' and not EmailAddr='' and QaLead is null"
+        # data_tags: "InActiveExpiredPaidSubscriberSub-rN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and NejmRequalifiedInd = 'N' and CountryName='United States' and EmailAddr!='' and RN_FLG='Y' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-rN"
+    backed_columns:
+      -
+        header: password
+        value: q@nejm1812
+      -
+        header: id
+        value: "[TIMESTAMP]"
+        
+  PayBill:
+    #keep_original: true   #set this as true if you do not want new data from db for this component    
+    headers:
+      db_headers:
+        - NejmUserStatusCd
+        - EmailAddr
+        - SubTypeDesc
+        - FirstName
+        - LastName
+        - PrimarySpecialityDesc
+        - WorkPlaceDesc
+        - ProfessionTypeDesc
+        - MmsCustNum
+        - CountryName
+        - PostalCd
+        - PostalCd
+        - AddrLine1
+        - City
+        - StateName
+            
+      test_data_headers:
+        - nejm_user_status_code
+        - email_address
+        - professional_category
+        - first_name
+        - last_name
+        - specialty
+        - place_of_work_or_study
+        - profession
+        - customer_number
+        - country_or_region
+        - postal_code
+        - zip_code
+        - address_1
+        - city
+        - state
+        
+    queries:
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompMmsMemberActivatedSub' and not EmailAddr='' and RN_FLG='Y' and NejmRequalifiedInd='Y'"
+        # data_tags: "ActiveFreeCompMmsMemberActivatedSub"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompLifetimeActivatedSub' and not EmailAddr='' and RN_FLG='Y' and NejmRequalifiedInd='Y'"
+        # data_tags: "ActiveFreeCompLifetimeActivatedSub"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and not EmailAddr='' and NejmRequalifiedInd='Y' and RN_FLG='Y'"
+        # data_tags: "ActivePaidActivatedSub"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveOpenCreditActivatedSub' and not EmailAddr='' and SubTypeCd = 'OTH' and CountryCd = 'USA' and RN_FLG='Y' and NejmRequalifiedInd='Y' and QaLead is null"
+        # data_tags: "ActiveOpenCreditActivatedSub-Oth-01"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveOpenCreditActivatedSub' and not EmailAddr='' and SubTypeCd = 'OTH' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "ActiveOpenCreditActivatedSub-Oth-02"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveOpenCreditActivatedSub' and not EmailAddr='' and SubTypeCd = 'OTH' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "ActiveOpenCreditActivatedSub-Oth-03"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveOpenCreditActivatedSub' and not EmailAddr='' and SubTypeDesc = 'Student' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "ActiveOpenCreditActivatedSub-Stu-01"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveOpenCreditActivatedSub' and not EmailAddr='' and SubTypeDesc = 'Student' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "ActiveOpenCreditActivatedSub-Stu-02"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveOpenCreditActivatedSub' and not EmailAddr='' and SubTypeDesc = 'Student' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "ActiveOpenCreditActivatedSub-Stu-03"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveOpenCreditActivatedSub' and not EmailAddr='' and SubTypeDesc in ('Physician' , 'Resident') and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "ActiveOpenCreditActivatedSub-Phy_Res-01"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveOpenCreditActivatedSub' and not EmailAddr='' and SubTypeDesc in ('Physician' , 'Resident') and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "ActiveOpenCreditActivatedSub-Phy_Res-02"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveOpenCreditActivatedSub' and not EmailAddr='' and SubTypeDesc in ('Physician' , 'Resident') and CountryCd = 'USA' and WorkPlaceCd is NOT null and NejmRequalifiedInd='Y' and QaLead is null"
+        # data_tags: "ActiveOpenCreditActivatedSub-Phy_Res-03"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and not EmailAddr='' and SubTypeCd = 'OTH' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "InActiveBillingSuspendSub-Oth-01"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and not EmailAddr='' and SubTypeCd = 'OTH' and CountryCd = 'USA' and NejmRequalifiedInd='Y' and QaLead is null"
+        # data_tags: "InActiveBillingSuspendSub-Oth-02"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and not EmailAddr='' and SubTypeCd = 'OTH' and CountryCd = 'USA' and WorkPlaceCd is NOT null and NejmRequalifiedInd='Y' and QaLead is null"
+        # data_tags: "InActiveBillingSuspendSub-Oth-03"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and not EmailAddr='' and SubTypeDesc = 'Student' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "InActiveBillingSuspendSub-Stu-01"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and not EmailAddr='' and SubTypeDesc = 'Student' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "InActiveBillingSuspendSub-Stu-02"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and not EmailAddr='' and SubTypeDesc = 'Student' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "InActiveBillingSuspendSub-Stu-03"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and not EmailAddr='' and SubTypeDesc in ('Physician' , 'Resident') and CountryCd = 'USA' and EmailAddr!='j.leichman@scvacares.com' and QaLead is null"
+        # data_tags: "InActiveBillingSuspendSub-Phy_Res-01"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and not EmailAddr='' and SubTypeDesc in ('Physician' , 'Resident') and CountryCd = 'USA' and NejmRequalifiedInd='Y' and QaLead is null"
+        # data_tags: "InActiveBillingSuspendSub-Phy_Res-02"
+      - 
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and not EmailAddr='' and SubTypeDesc in ('Physician' , 'Resident') and WorkPlaceCd is NOT null and NejmRequalifiedInd='Y' and QaLead is null"
+        data_tags: "InActiveBillingSuspendSub-Phy_Res-03"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidUnpaidFutureStartSub' and not EmailAddr='' and SubTypeCd = 'OTH' and QaLead is null"
+        # data_tags: "ActivePaidUnpaidFutureStartSub-Oth-01"
+      - 
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidUnpaidFutureStartSub' and not EmailAddr='' and SubTypeCd = 'OTH' and CountryCd = 'USA' and QaLead is null"
+        data_tags: "ActivePaidUnpaidFutureStartSub-Oth-02"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidUnpaidFutureStartSub' and not EmailAddr='' and SubTypeCd = 'OTH' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "ActivePaidUnpaidFutureStartSub-Oth-03"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidUnpaidFutureStartSub' and not EmailAddr='' and SubTypeDesc = 'Student' and QaLead is null"
+        # data_tags: "ActivePaidUnpaidFutureStartSub-Stu-01"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidUnpaidFutureStartSub' and not EmailAddr='' and SubTypeDesc = 'Student' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "ActivePaidUnpaidFutureStartSub-Stu-02"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidUnpaidFutureStartSub' and not EmailAddr='' and SubTypeDesc = 'Student' and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "ActivePaidUnpaidFutureStartSub-Stu-03"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidUnpaidFutureStartSub' and not EmailAddr='' and SubTypeDesc in ('Physician' , 'Resident') and QaLead is null"
+        # data_tags: "ActivePaidUnpaidFutureStartSub-Phy_Res-01"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidUnpaidFutureStartSub' and not EmailAddr='' and SubTypeDesc in ('Physician' , 'Resident') and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "ActivePaidUnpaidFutureStartSub-Phy_Res-02"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidUnpaidFutureStartSub' and not EmailAddr='' and SubTypeDesc in ('Physician' , 'Resident') and CountryCd = 'USA' and WorkPlaceCd is NOT null and QaLead is null"
+        # data_tags: "ActivePaidUnpaidFutureStartSub-Phy_Res-03"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompMmsMemberNotActivatedSub' and not EmailAddr='' and SubTypeDesc in ('Physician' , 'Resident') and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "ActiveFreeCompMmsMemberNotActivatedSub"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveCancelNonPayRegularSub' and not EmailAddr='' and SubTypeDesc in ('Physician' , 'Resident') and CountryCd = 'USA' and QaLead is null"
+        # data_tags: "InActiveCancelNonPayRegularSub"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveCancelNonPayRegularSub' and not EmailAddr='' and CountryCd = 'USA' and NejmRequalifiedInd = 'Y' and RN_FLG='C' and QaLead is null"
+        # data_tags: "InActiveCancelNonPayRegularSub-rY-arC"
+    backed_columns:
+      -
+        header: password
+        value: q@nejm1812
+      -
+        header: id
+        value: "[TIMESTAMP]"
+
+  PayPerView:
+    keep_original: true   #set this as true if you do not want new data from db for this component
+    backed_columns:
+      -
+        header: password
+        value: q@nejm1812
+      -
+        header: id
+        value: "[TIMESTAMP]"
+                
+  PPV_Existing_user:
+    #keep_original: true   #set this as true if you do not want new data from db for this component
+    headers:
+      db_headers:
+        - NejmUserStatusCd
+        - EmailAddr
+        - SubTypeDesc
+        - FirstName
+        - LastName
+        - PrimarySpecialityDesc
+        - WorkPlaceDesc
+        - ProfessionTypeDesc
+        - MmsCustNum
+        - CountryName
+        - PostalCd
+        - PostalCd
+        - AddrLine1
+        - City
+        - StateName
+            
+      test_data_headers:
+        - nejm_user_status_code
+        - email_address
+        - professional_category
+        - first_name
+        - last_name
+        - specialty
+        - place_of_work_or_study
+        - profession
+        - customer_number
+        - country_or_region
+        - postal_code
+        - zip_code
+        - address_1
+        - city
+        - state
+        
+    queries:
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='United States' and SubTypeCd='RES' and PostalCd!='' and WorkPlaceDesc is NOT null and PrimarySpecialityDesc is NOT null and NejmRequalifiedInd = 'Y' and QaLead is null"
+        # data_tags: "ActiveBarter-Res-USA-cPC"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='United States' and SubTypeCd='PHY' and PostalCd!='' and EmailAddr!='' and QaLead is null and NejmRequalifiedInd = 'Y'"
+        # data_tags: "ActiveBarter-Phy-USA"  
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='United States' and SubTypeCd='STU' and PostalCd!='' and EmailAddr!='' and NejmRequalifiedInd = 'Y' and QaLead is null"
+        # data_tags: "ActiveBarter-Stu-USA"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='United States' and SubTypeCd='PHY' and PostalCd!='' and EmailAddr!='' and NejmRequalifiedInd = 'N' and QaLead is null"
+        # data_tags: "ActiveBarter-Phy-USA-rN" 
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='United States' and SubTypeCd='PHY' and PostalCd!='' and EmailAddr!='' and QaLead is null"
+        # data_tags: "ActiveBarter-Phy-USA-NEJMAINT-8942" 
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='United States' and SubTypeCd='RES' and PostalCd!='' and WorkPlaceDesc is NOT null and PrimarySpecialityDesc is NOT null and QaLead is null"
+        # data_tags: "ActiveBarter-Res-USA" 
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='United States' and SubTypeCd='RES' and PostalCd!='' and EmailAddr!='' and NejmRequalifiedInd='N' and QaLead is null"
+        # data_tags: "ActiveBarter-Res-USA-rN"   
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='United States' and SubTypeCd='STU' and PostalCd!='' and EmailAddr!='' and NejmRequalifiedInd = 'N' and QaLead is null"
+        # data_tags: "ActiveBarter-Stu-USA-rN" 
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='United States' and SubTypeCd='OTH' and PostalCd!='' and EmailAddr!='' and NejmRequalifiedInd = 'N' and  QaLead is null"
+        # data_tags: "ActiveBarter-Oth-USA-rN" 
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='United States' and SubTypeCd='RES' and PostalCd!='' and QaLead is null"
+        # data_tags: "ActiveBarter-Res-USA-rY"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='United States' and SubTypeCd='PHY' and PostalCd!='' and NejmRequalifiedInd = 'Y' and QaLead is null"
+        # data_tags: "ActiveBarter-Phy-USA-NEJMAINT-8918" 
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='United States' and SubTypeCd='STU' and PostalCd!='' and NejmRequalifiedInd = 'Y' and QaLead is null"
+        # data_tags: "ActiveBarter-Stu-USA-rY" 
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='United States' and SubTypeCd='RES' and PostalCd!='' and NejmRequalifiedInd = 'Y' and QaLead is null"
+        # data_tags: "ActiveBarter-Res-USA-rY-01"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='United States' and SubTypeCd='STU' and PostalCd!='' and NejmRequalifiedInd = 'Y' and QaLead is null"
+        # data_tags: "ActiveBarter-Stu-USA-rY-01"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='United States' and SubTypeCd='OTH' and PostalCd!='' and NejmRequalifiedInd = 'Y' and QaLead is null"
+        # data_tags: "ActiveBarter-Oth-USA-rY" 
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='United States' and SubTypeCd='OTH' and PostalCd!='' and EmailAddr!='' and NejmRequalifiedInd = 'Y' and  QaLead is null"
+        # data_tags: "ActiveBarter-Oth-USA" 
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='United States' and SubTypeCd='STU' and PostalCd!='' and EmailAddr!='' and NejmRequalifiedInd = 'Y' and QaLead is null"
+        data_tags: "ActiveBarter-Stu-USA-01"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='United States' and SubTypeCd='RES' and PostalCd!='' and WorkPlaceDesc is NOT null and PrimarySpecialityDesc is NOT null and NejmRequalifiedInd = 'Y' and QaLead is null"
+        # data_tags: "ActiveBarter-Res-USA-01" 
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='United States' and SubTypeCd='PHY' and PostalCd!='' and EmailAddr!='' and NejmRequalifiedInd = 'Y' and QaLead is null"
+        # data_tags: "ActiveBarter-Phy-USA-01"  
+    backed_columns:
+      -
+        header: password
+        value: q@nejm1812
+      -
+        header: id
+        value: "[TIMESTAMP]"
+        
+  CDF_Messaging:
+    keep_original: true   #set this as true if you do not want new data from db for this component
+    headers:
+      db_headers:
+        - NejmUserStatusCd
+        - EmailAddr
+        - SubTypeDesc
+        - FirstName
+        - LastName
+        - PrimarySpecialityDesc
+        - WorkPlaceDesc
+        - ProfessionTypeDesc
+        - MmsCustNum
+        - AddrLine1
+        - CountryName
+        - City
+        - StateName
+        - PostalCd
+        - ProductCd
+            
+      test_data_headers:
+        - nejm_user_status_code
+        - email_address
+        - professional_category
+        - first_name
+        - last_name
+        - specialty
+        - place_of_work_or_study
+        - profession
+        - customer_number
+        - address_1
+        - country_or_region
+        - city
+        - state
+        - postal_code
+        - subscription_type
+        
+    queries:
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and CountryName NOT IN ('JAPAN','CHINA','KOREA(SOUTH)','HONG KONG')"
+        # data_tags: "ActivePaidActivatedSub-NOT_KOR_JAP_CHN_HKG"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompMmsMemberActivatedSub' and CountryName='HONG KONG'"
+        # data_tags: "ActiveFreeCompMmsMemberActivatedSub-HKG" 
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreePerpetualNotMmsMemberSubActivated' and CountryName='JAPAN'"
+        # data_tags: "ActiveFreePerpetualNotMmsMemberSubActivated-JAP"  
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompMediaActivatedSub' and CountryName='CHINA'"
+        # data_tags: "ActiveFreeCompMediaActivatedSub-CHN" 
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompMediaActivatedSub' and CountryName='JAPAN'"
+        # data_tags: "ActiveFreeCompMediaActivatedSub-JAP"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompMediaActivatedSub' and CountryName='HONG KONG'"
+        # data_tags: "ActiveFreeCompMediaActivatedSub-HKG"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompLifetimeActivatedSub' and CountryName='HONG KONG'"
+        # data_tags: "ActiveFreeCompLifetimeActivatedSub-HKG"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreePerpetualNotMmsMemberSubActivated' and CountryName='CHINA'"
+        # data_tags: "ActiveFreePerpetualNotMmsMemberSubActivated-CHN"   
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreePerpetualNotMmsMemberSubActivated' and CountryName='HONG KONG'"
+        # data_tags: "ActiveFreePerpetualNotMmsMemberSubActivated-HKG"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreePerpetualNotMmsMemberSubActivated' and CountryName='United States'"
+        # data_tags: "ActiveFreePerpetualNotMmsMemberSubActivated-USA"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='CHINA' and EmailAddr!='' and SubTypeCd='PHY' and City!='' and NejmRequalifiedInd = 'Y' and QaLead is null"
+        # data_tags: "ActiveBarter-CHN-04"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='CHINA' and EmailAddr!='' and SubTypeCd='PHY' and City!='' and NejmRequalifiedInd = 'Y' and QaLead is null"
+        # data_tags: "ActiveBarter-CHN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='CHINA' and EmailAddr!='' and SubTypeCd='PHY' and City!='' and NejmRequalifiedInd = 'Y' and QaLead is null"
+        # data_tags: "ActiveBarter-CHN-01"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='CHINA' and EmailAddr!='' and SubTypeCd='PHY' and City!='' and NejmRequalifiedInd = 'Y' and QaLead is null"
+        # data_tags: "ActiveBarter-CHN-03"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='CHINA' and EmailAddr!='' and SubTypeCd='PHY' and City!='' and NejmRequalifiedInd = 'Y' and QaLead is null"
+        # data_tags: "ActiveBarter-CHN-05"          
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='JAPAN'"
+        # data_tags: "ActiveBarter-JAP"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where CountryName='HONG KONG' and EmailAddr='DANL@NETVIGATOR.COM'"
+        # data_tags: "ActiveBarter-HKG"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='HONG KONG' and EmailAddr!='' and SubTypeCd='PHY' and City!='' and NejmRequalifiedInd = 'Y' and QaLead is null"
+        # data_tags: "ActiveBarter-HKG-01"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='HONG KONG' and EmailAddr!='' and WorkPlaceDesc is NOT null and QaLead is null"
+        # data_tags: "ActiveBarter-HKG-rN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='HONG KONG' and EmailAddr!='' and SubTypeCd='PHY' and City!='' and NejmRequalifiedInd = 'Y' and QaLead is null"
+        # data_tags: "ActiveBarter-HKG-04"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryName='HONG KONG' and EmailAddr!='' and SubTypeCd='PHY' and City!='' and NejmRequalifiedInd = 'Y' and QaLead is null"
+        # data_tags: "ActiveBarter-HKG-05"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveExclusiveAgentPaidActivatedSub' and CountryName='HONG KONG'"
+        # data_tags: "ActiveExclusiveAgentPaidActivatedSub-HKG"  
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveExclusiveAgentPaidActivatedSub' and CountryName='JAPAN'"
+        data_tags: "ActiveExclusiveAgentPaidActivatedSub-JAP" 
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveExclusiveAgentPaidActivatedSub' and CountryName='CHINA'"
+        # data_tags: "ActiveExclusiveAgentPaidActivatedSub-CHN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveBillingSuspendSub' and CountryName='CHINA'"
+        # data_tags: "InActiveBillingSuspendSub-CHN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveBillingSuspendSub' and CountryName='HONG KONG'"
+        # data_tags: "InActiveBillingSuspendSub-HKG"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompLifetimeActivatedSub' and CountryName='HONG KONG'"
+        # data_tags: "ActiveFreeCompLifetimeActivatedSub-HKG"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveExclusiveAgentPaidNotActivatedSub' and CountryCd='JPN' and EmailAddr=''"
+        # data_tags: "ActiveExclusiveAgentPaidNotActivatedSub-eN-JAP"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompMmsMemberActivatedSub' and CountryName IN ('JAPAN','CHINA','KOREA(SOUTH)','HONG KONG')"
+        # data_tags: "ActiveFreeCompMmsMemberActivatedSub-HKG_JAP_KOR_CHN" 
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompMediaActivatedSub' and CountryName IN ('JAPAN','CHINA','KOREA(SOUTH)','HONG KONG')"
+        # data_tags: "ActiveFreeCompMediaActivatedSub-HKG_JAP_KOR_CHN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompLifetimeActivatedSub' and CountryName IN ('JAPAN','CHINA','KOREA(SOUTH)','HONG KONG')"
+        # data_tags: "ActiveFreeCompLifetimeActivatedSub-HKG_JAP_KOR_CHN"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and CountryCd = 'HKG'"
+        data_tags: "ActivePaidActivatedSub-HKG"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and CountryCd='HKG' and SubTypeCd ='PHY' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-HKG-01" 
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and CountryCd='HKG' and SubTypeCd ='PHY' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-HKG-02"       
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd='PHY' and CountryCd = 'CHN' and NOT EmailAddr='' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-CHN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and CountryCd='CHN' and SubTypeCd ='PHY' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-CHN-01"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and CountryCd='CHN' and SubTypeCd ='PHY' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-CHN-02" 
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and CountryCd = 'HKG' and ExpireDate > GETDATE() and ExpireDate < (GETDATE() + 180) and NOT EmailAddr='' and WorkPlaceCd is NOT null and WorkPlaceDesc is NOT null and PrimarySpecialityDesc is NOT null and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-HKG-expire_in_6_months"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidNotActivatedSub' and CountryCd='HKG' and QaLead is null"
+        # data_tags: "ActivePaidNotActivatedSub-CHN-eN"  
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveExclusivePaidActivatedSub' and CountryName='JAPAN'"
+        # data_tags: "ActiveExclusivePaidActivatedSub-JAP" 
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveExclusivePaidActivatedSub' and CountryCd='KOR'"
+        # data_tags: "ActiveExclusivePaidActivatedSub-KOR"  
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveExclusiveAgentPaidActivatedSub' and CountryCd='KOR'"
+        # data_tags: "ActiveExclusiveAgentPaidActivatedSub-KOR"  
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompMediaActivatedSub' and CountryCd='KOR'"
+        # data_tags: "ActiveFreeCompMediaActivatedSub-KOR"  
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and CountryCd='KOR'"
+        # data_tags: "ActiveBarter-KOR" 
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and NOT EmailAddr='' and CountryCd='CHN'"
+        # data_tags: "InActiveBillingSuspendSub-CHN"
+    backed_columns:
+      -
+        header: password
+        value: q@nejm1812
+      -
+        header: id
+        value: "[TIMESTAMP]"
+        
+  Access_Control:
+      keep_original: true   #set this as true if you do not want new data from db for this component
+      headers:
+        db_headers:
+          - NejmUserStatusCd
+          - EmailAddr
+          - SubTypeDesc
+          - FirstName
+          - LastName
+          - PrimarySpecialityDesc
+          - WorkPlaceDesc
+          - ProfessionTypeDesc
+          - MmsCustNum
+          - CountryName
+          - City
+          - StateName
+          - ProductCd
+              
+        test_data_headers:
+          - nejm_user_status_code
+          - email_address
+          - professional_category
+          - first_name
+          - last_name
+          - specialty
+          - place_of_work_or_study
+          - profession
+          - customer_number
+          - country_or_region
+          - city
+          - state
+          - subscription_type
+          
+      queries:
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'activepaidactivatedsub' and NejmRequalifiedInd = 'N' and CountryCd = 'USA' and QaLead is null"
+          data_tags: "ActiveAgentPaidActivatedSub-USA-rY"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidMediaActivatedSub'"
+          data_tags: "ActivePaidMediaActivatedSub"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveAgentPaidActivatedSub' and EmailAddr='wolfgang.jilg@klinik.uni-regensburg.de'"
+          data_tags: "ActiveAgentPaidActivatedSub"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter'"
+          data_tags: "ActiveBarter"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveBillingSuspendSub' and EmailAddr!=''"
+          data_tags: "InActiveBillingSuspendSub" 
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredPaidSubscriberSub'"
+          data_tags: "InActiveExpiredPaidSubscriberSub"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'activepaidactivatedsub' and EmailAddr!='' and QaLead is null"
+          data_tags: "activepaidactivatedsub"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'Activepaidactivatedsub' and EmailAddr!=''"
+          data_tags: "Activepaidactivatedsub"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where EmailAddr='onatest2@test.com'"
+          data_tags: "ActiveAgentPaidActivatedSub-NEJMAINT8545"
+      backed_columns:
+        -
+          header: password
+          value: q@nejm1812
+        -
+          header: id
+          value: "[TIMESTAMP]"
+          
+  My_NEJM_Account:
+      keep_original: true   #set this as true if you do not want new data from db for this component
+      headers:
+        db_headers:
+          - NejmUserStatusCd
+          - EmailAddr
+          - MmsCustNum
+          - ProductCd
+          - AmountDue
+          - CountryName
+          - ExpireDate
+              
+        test_data_headers:
+          - nejm_user_status_code
+          - email_address
+          - customer_number
+          - subscription_type
+          - amount_due
+          - country_or_region
+          - date
+          
+      queries:
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'activepaidactivatedsub' and SubTypeDesc ='Resident' and CountryCd ='USA'"
+          data_tags: "activepaidactivatedsub-Res"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'activepaidactivatedsub' and SubTypeCd = 'OTH'  and CountryCd ='USA'"
+          data_tags: "activepaidactivatedsub-Oth"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'activepaidactivatedsub' and SubTypeCd = 'STU'  and CountryCd ='USA'"
+          data_tags: "activepaidactivatedsub-Stu"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'activepaidactivatedsub' and SubTypeCd = 'PHY'  and CountryCd ='USA'"
+          data_tags: "activepaidactivatedsub-Phy"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'activepaidactivatedsub' and CountryCd ='USA' and QaLead is null"
+          data_tags: "activepaidactivatedsub"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveBarter' and not FirstName='' and CountryCd ='USA'"
+          data_tags: "ActiveBarter-USA"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveBarter' and not FirstName='' and CountryName = 'CANADA'"
+          data_tags: "ActiveBarter-CAN"
+        -
+          query: "Select TOP 1* from odl.qa.v_nejm_customers where NejmuserStatusCd ='InActiveExpiredPaidSubscriberSub' and ExpireDate < (GETDATE() - 181)"
+          data_tags: "InActiveExpiredPaidSubscriberSub_ExpiredMoreThan6MonthsAgo"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd ='InActiveExpiredPaidSubscriberSub' and EmailAddr!='' and ExpireDate < GETDATE() and ExpireDate > (GETDATE() - 181) and RN_FLG='Y'"
+          data_tags: "InActiveExpiredPaidSubscriberSub_ExpiredLessThan6MonthsAgo"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'activepaidactivatedsub' and CountryCd='USA'"
+          data_tags: "activepaidactivatedsub-USA"
+        - 
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd ='ActiveOpenCreditActivatedSub' and QaLead is null"
+          data_tags: "ActiveOpenCreditActivatedSub"
+        - 
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd ='InActiveBillingSuspendSub' and NOT EmailAddr='' and QaLead is null"
+          data_tags: "InActiveBillingSuspendSub"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd != 'ActiveExclusiveAgentPaidActivatedSub' and NOT EmailAddr='' and QaLead is null"
+          data_tags: "Not-ActiveExclusiveAgentPaidActivatedSub"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveExclusiveAgentPaidActivatedSub' and NOT EmailAddr='' and QaLead is null"
+          data_tags: "ActiveExclusiveAgentPaidActivatedSub"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveExclusiveAgentPaidActivatedSub' and CountryName='KOREA (SOUTH)'"
+          data_tags: "ActiveExclusiveAgentPaidActivatedSub-KOR"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveExclusiveAgentPaidActivatedSub' and CountryName='JAPAN'"
+          data_tags: "ActiveExclusiveAgentPaidActivatedSub-JAP" 
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidUnpaidFutureStartSub' and NOT EmailAddr='' and QaLead is null"
+          data_tags: "ActivePaidUnpaidFutureStartSub"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveIndefiniteSuspendPaidNonPaidSub'"
+          data_tags: "InActiveIndefiniteSuspendPaidNonPaidSub"
+        - 
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveFreeCompMediaActivatedSub' or NejmuserStatusCd = 'ActivePaidMediaActivatedSub' and QaLead is null"
+          data_tags: "ActiveFreeCompMediaActivatedSub or ActivePaidMediaActivatedSub" 
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and NOT EmailAddr='' and QaLead is null"
+          data_tags: "ActivePaidActivatedSub"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveTemporarySuspendSub' and NOT EmailAddr=''"
+          data_tags: "InActiveTemporarySuspendSub"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidMediaActivatedSub' and NOT EmailAddr=''"
+          data_tags: "ActivePaidMediaActivatedSub"  
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveUndeliverableSub' and NOT EmailAddr=''"
+          data_tags: "InActiveUndeliverableSub"   
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveFreeCompMediaActivatedSub' and NOT EmailAddr=''"
+          data_tags: "ActiveFreeCompMediaActivatedSub"   
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveFreePerpetualNotMmsMemberSubActivated' and NOT EmailAddr=''"
+          data_tags: "ActiveFreePerpetualNotMmsMemberSubActivated"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompLifetimeActivatedSub' and NOT EmailAddr=''"
+          data_tags: "ActiveFreeCompLifetimeActivatedSub"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveFreeCompMmsMemberActivatedSub' and not EmailAddr=''"
+          data_tags: "ActiveFreeCompMmsMemberActivatedSub"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveExpiredCompSponsoredWithWebAccessSub' and not EmailAddr='' and QaLead is null"
+          data_tags: "InActiveExpiredCompSponsoredWithWebAccessSub"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveExpiredCompRegularSub' and not EmailAddr='' and QaLead is null"
+          data_tags: "InActiveExpiredCompRegularSub"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveCancelNonPayRegularSub' and not EmailAddr=''"
+          data_tags: "InActiveCancelNonPayRegularSub" 
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'InActiveCancelCustomerRequestSub' and NOT EmailAddr=''"
+          data_tags: "InActiveCancelCustomerRequestSub"  
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveFreeCompRegularActivatedSub' and NOT EmailAddr=''"
+          data_tags: "ActiveFreeCompRegularActivatedSub"   
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveAgentPaidActivatedSub' and NOT EmailAddr=''"
+          data_tags: "ActiveAgentPaidActivatedSub"
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveBarter' and NOT EmailAddr=''"
+          data_tags: "ActiveBarter"  
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActiveExclusiveAgentPaidActivatedSub' and CountryCd='JPN' and NOT EmailAddr=''"
+          data_tags: "ActiveExclusiveAgentPaidActivatedSub-JPN" 
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and CountryName='HONG KONG'"
+          data_tags: "ActivePaidActivatedSub-HKG"  
+        -
+          query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and CountryName='CHINA'"
+          data_tags: "ActivePaidActivatedSub-CHN" 
+      backed_columns:
+        -
+          header: password
+          value: q@nejm1812
+        -
+          header: id
+          value: "[TIMESTAMP]"
+          
+  CDF_Messaging_new_user:
+    keep_original: true   #set this as true if you do not want new data from db for this component
+    backed_columns:
+      -
+        header: password
+        value: q@nejm1812
+      -
+        header: id
+        value: "[TIMESTAMP]"
+        
+  Review_CME:
+    keep_original: true   #set this as true if you do not want new data from db for this component
+    backed_columns:
+      -
+        header: password
+        value: q@nejm1812
+      -
+        header: id
+        value: "[TIMESTAMP]"        
+        
+  Review_CME_Existing_User:
+    #keep_original: true   #set this as true if you do not want new data from db for this component
+    headers:
+      db_headers:
+        - NejmUserStatusCd
+        - EmailAddr
+        - SubTypeDesc
+        - FirstName
+        - LastName
+        - PrimarySpecialityDesc
+        - WorkPlaceDesc
+        - ProfessionTypeDesc
+        - MmsCustNum
+        - CountryName
+        - CompanyName
+        - AddrLine1
+        - AddrLine2
+        - City
+        - PostalCd
+        - StateName
+        - PostalCd
+      test_data_headers:
+        - nejm_user_status_code
+        - email_address
+        - professional_category
+        - first_name
+        - last_name
+        - specialty
+        - place_of_work_or_study
+        - profession
+        - customer_number
+        - country_or_region
+        - company_name
+        - address_1
+        - address_2
+        - city
+        - postal_code
+        - state
+        - zip_code
+        
+    queries:
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd='PHY' and CountryCd='USA' and NOT EmailAddr='' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-Phy-USA"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd='RES' and CountryCd='USA' and NOT EmailAddr='' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-Res-USA"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd='STU' and CountryCd='USA' and NOT EmailAddr='' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-Stu-USA"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd='OTH' and CountryCd='USA' and NOT EmailAddr='' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-Oth-USA"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and SubTypeCd='PHY' and CountryCd = 'CAN' and NOT EmailAddr=''"
+        # data_tags: "InActiveBillingSuspendSub-Phy-CAN"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and not EmailAddr='' and SubTypeCd='RES' and CountryCd = 'CAN'"
+        # data_tags: "InActiveBillingSuspendSub-Res-CAN"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and not EmailAddr='' and SubTypeCd='STU' and CountryCd = 'CAN'"
+        # data_tags: "InActiveBillingSuspendSub-Stu-CAN"                        
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and not EmailAddr='' and SubTypeCd='OTH' and CountryCd = 'CAN'"
+        # data_tags: "InActiveBillingSuspendSub-Oth-CAN"
+      - 
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveUndeliverableSub' and not EmailAddr='' and SubTypeCd='PHY' and CountryCd = 'DEU'"
+        data_tags: "InActiveUndeliverableSub-Phy-VAT_GER"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveUndeliverableSub' and not EmailAddr='' and SubTypeCd='RES' and CountryCd = 'DEU'"
+        # data_tags: "InActiveUndeliverableSub-Res-VAT_GER"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveUndeliverableSub' and not EmailAddr='' and SubTypeCd='STU' and CountryCd = 'DEU'"
+        # data_tags: "InActiveUndeliverableSub-Stu-VAT_GER"                        
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveUndeliverableSub' and not EmailAddr='' and SubTypeCd='OTH' and CountryCd = 'DEU'"
+        # data_tags: "InActiveUndeliverableSub-Oth-VAT_GER"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd='PHY' and CountryCd='USA' and NOT EmailAddr='' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-Phy_to_Oth-USA"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd='RES' and CountryCd='USA' and NOT EmailAddr='' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-Res_to_Phy-USA"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd='RES' and CountryCd='USA' and NOT EmailAddr='' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-Res_to_Oth-USA"        
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd='STU' and CountryCd='USA' and NOT EmailAddr='' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-Stu_to_Phy-USA"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd='STU' and CountryCd='USA' and NOT EmailAddr='' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-Stu_to_Oth-USA"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd='OTH' and CountryCd='USA' and NOT EmailAddr='' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-Oth_to_Phy-USA" 
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd='PHY' and CountryCd='USA' and NOT EmailAddr='' and NejmRequalifiedInd = 'N' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-Phy_Res_Stu_Oth-USA-rN"              
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and not EmailAddr='' and SubTypeCd='PHY' and CountryCd = 'DEU' and NejmRequalifiedInd = 'N' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-Phy_Res_Stu_Oth-VAT_GER-rN"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and not EmailAddr='' and SubTypeCd='PHY' and CountryCd = 'CAN' and NejmRequalifiedInd = 'N' and QaLead is null"
+        # data_tags: "InactiveBillingSuspendSub-Phy_Res_Stu_Oth-CAN-rN"
+      # -
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd='PHY' and CountryCd='USA' and NOT EmailAddr='' and QaLead is null"
+        # data_tags: "ActivePaidActivatedSub-Phy_Res_Stu_Oth-USA"
+      # - 
+        # query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and not EmailAddr='' and SubTypeCd='PHY' and CountryCd = 'CAN'"
+        # data_tags: "InactiveBillingSuspendSub-Phy_Res_Stu_Oth-CAN"
+      - 
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and not EmailAddr='' and SubTypeCd='PHY' and CountryCd = 'DEU' and QaLead is null"
+        data_tags: "ActivePaidActivatedSub-Phy_Res_Stu_Oth-VAT_GER"
+    backed_columns:
+      -
+        header: password
+        value: q@nejm1812
+        
+  Non_CDF_Existing_User:
+    keep_original: true   #set this as true if you do not want new data from db for this component
+    headers:
+      db_headers:
+        - NejmUserStatusCd
+        - EmailAddr
+        - SubTypeDesc
+        - FirstName
+        - LastName
+        - PrimarySpecialityDesc
+        - WorkPlaceDesc
+        - ProfessionTypeDesc
+        - MmsCustNum
+        - CountryName
+        - CompanyName
+        - AddrLine1
+        - AddrLine2
+        - City
+        - PostalCd
+        - StateName
+        - PostalCd
+      test_data_headers:
+        - nejm_user_status_code
+        - email_address
+        - professional_category
+        - first_name
+        - last_name
+        - specialty
+        - place_of_work_or_study
+        - profession
+        - customer_number
+        - country_or_region
+        - company_name
+        - address_1
+        - address_2
+        - city
+        - postal_code
+        - state
+        - zip_code
+        
+    queries:
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidUnpaidFutureStartSub' and SubTypeCd='PHY' and CountryCd='USA' and NOT EmailAddr=''"
+        data_tags: "ActivePaidUnpaidFutureStartSub-eY"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where SubTypeCd='PHY' and CountryName='United States' and NejmRequalifiedInd = 'Y'"
+        data_tags: "Physician-USA-rY"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where SubTypeCd='PHY' and CountryName='United States' and NejmRequalifiedInd = 'Y' and QaLead is null"
+        data_tags: "Physician-USA-rY-8328"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmuserStatusCd = 'ActivePaidActivatedSub' and NOT EmailAddr=''"
+        data_tags: "ActivePaidActivatedSub"
+
+    backed_columns:
+      -
+        header: password
+        value: q@nejm1812
+        
+  InstitutionAdminCenter:
+    keep_original: true   #set this as true if you do not want new data from db for this component
+    backed_columns:
+      -
+        header: password
+        value: q@nejm1812
+        
+  Auto_Renew:
+    keep_original: true   #set this as true if you do not want new data from db for this component
+    headers:
+      db_headers:
+        - NejmUserStatusCd
+        - EmailAddr
+        - SubTypeDesc
+        - FirstName
+        - LastName
+        - PrimarySpecialityDesc
+        - WorkPlaceDesc
+        - ProfessionTypeDesc
+        - MmsCustNum
+        - CountryName
+      test_data_headers:
+        - nejm_user_status_code
+        - email_address
+        - professional_category
+        - first_name
+        - last_name
+        - specialty
+        - place_of_work_or_study
+        - profession
+        - customer_number
+        - country_region
+    queries:
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd = 'RES' and NOT EmailAddr='' and NejmRequalifiedInd = 'Y' and CountryCd = 'USA' and RN_FLG = 'C'"
+        data_tags: "ActivePaidActivatedSub-Res-USA-arC"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd = 'PHY' and NOT EmailAddr='' and NejmRequalifiedInd = 'Y' and CountryName = 'Canada' and (RN_FLG = 'A' or RN_FLG = 'C')"
+        data_tags: "ActivePaidActivatedSub-Phy-CAN-arA"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd = 'STU' and CountryName = 'ITALY' and RN_FLG = 'C'"
+        data_tags: "ActivePaidActivatedSub-Stu-VAT-arC"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd = 'RES' and NOT EmailAddr='' and NejmRequalifiedInd = 'Y' and CountryName = 'Canada' and RN_FLG = 'C'"
+        data_tags: "ActivePaidActivatedSub-Res-CAN-arC"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd = 'PHY' and NOT EmailAddr='' and NejmRequalifiedInd = 'Y' and CountryName = 'Italy' and (RN_FLG = 'A' or RN_FLG = 'C')"
+        data_tags: "ActivePaidActivatedSub-Phy-VAT-arA"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd = 'STU' and NOT EmailAddr='' and NejmRequalifiedInd = 'Y' and CountryName = 'Italy' and (RN_FLG = 'A' or RN_FLG = 'C')"
+        data_tags: "ActivePaidActivatedSub-Stu-VAT-arA"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd = 'PHY' and NOT EmailAddr='' and NejmRequalifiedInd = 'Y' and CountryCd = 'USA' and RN_FLG = 'Y'"
+        data_tags: "ActivePaidActivatedSub-Phy-USA-arY"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd = 'OTH' and NOT EmailAddr='' and NejmRequalifiedInd = 'Y' and CountryCd = 'USA' and RN_FLG = 'Y'"
+        data_tags: "ActivePaidActivatedSub-Oth-USA-arY"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd = 'STU' and NOT EmailAddr='' and NejmRequalifiedInd = 'Y' and CountryCd = 'USA' and RN_FLG = 'Y'"
+        data_tags: "ActivePaidActivatedSub-Stu-USA-arY"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd = 'RES' and NOT EmailAddr='' and NejmRequalifiedInd = 'Y' and CountryCd = 'USA' and RN_FLG = 'Y' and QaLead is null"
+        data_tags: "ActivePaidActivatedSub-Res-USA-arY"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd = 'STU' and CapStepUp = 'Y' and NOT EmailAddr='' and CountryCd = 'USA' and RN_FLG = 'Y'"
+        data_tags: "ActivePaidActivatedSub_Stu-USA-cY-01"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd = 'RES' and CapStepUp = 'N' and NejmRequalifiedInd = 'Y' and NOT EmailAddr='' and CountryCd = 'USA' and RN_FLG = 'Y' and QaLead is null"
+        data_tags: "ActivePaidActivatedSub_Res-USA-cN-01"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd = 'RES' and CapStepUp = 'N' and NejmRequalifiedInd = 'Y' and NOT EmailAddr='' and CountryCd = 'USA' and RN_FLG = 'Y' and QaLead is null"
+        data_tags: "ActivePaidActivatedSub_Res-USA-cN"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidActivatedSub' and SubTypeCd = 'STU' and CapStepUp = 'Y' and NejmRequalifiedInd = 'Y' and NOT EmailAddr='' and CountryCd = 'USA' and RN_FLG = 'Y'"
+        data_tags: "ActivePaidActivatedSub_Stu-USA-cY"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredPaidSubscriberSub' and SubTypeCd = 'PHY' and CapStepUp = 'Y' and NejmRequalifiedInd = 'Y' and NOT EmailAddr='' and CountryCd = 'USA' and WorkPlaceDesc is NOT null and RN_FLG = 'Y' and QaLead is null"
+        data_tags: "InActiveExpiredPaidSubscriberSub_PHY_RN_Y_cY"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveExpiredPaidSubscriberSub' and SubTypeCd = 'PHY' and CapStepUp = 'N' and NejmRequalifiedInd = 'Y' and NOT EmailAddr='' and CountryCd = 'USA' and WorkPlaceDesc is NOT null and RN_FLG = 'Y' and QaLead is null"
+        data_tags: "InActiveExpiredPaidSubscriberSub_PHY_RN_Y_cN"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and SubTypeCd = 'PHY' and NOT EmailAddr='' and CountryCd = 'USA' and NejmRequalifiedInd = 'Y' and WorkPlaceDesc is NOT null and RN_FLG = 'Y' and QaLead is NULL"
+        data_tags: "InActiveBillingSuspendSub_PHY_RN_Y"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and SubTypeCd = 'RES' and NOT EmailAddr='' and CountryCd = 'USA' and NejmRequalifiedInd = 'Y' and WorkPlaceDesc is NOT null and RN_FLG = 'Y' and QaLead is NULL"
+        data_tags: "InActiveBillingSuspendSub_RES_RN_Y"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and SubTypeCd = 'RES' and NOT EmailAddr='' and CountryCd = 'USA' and NejmRequalifiedInd = 'Y' and WorkPlaceDesc is NOT null and RN_FLG = 'Y' and QaLead is NULL"
+        data_tags: "InActiveBillingSuspendSub_RES_RN_Y-01"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidunpaidFutureStartSub' and SubTypeCd IN ('PHY','RES') and NOT EmailAddr='' and CountryCd = 'USA' and NejmRequalifiedInd = 'Y' and WorkPlaceDesc is NOT null and RN_FLG = 'Y' and QaLead is NULL"
+        data_tags: "ActivePaidunpaidFutureStartSub-PHY_RES_RN_Y"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidunpaidFutureStartSub' and SubTypeCd IN ('PHY','RES') and NOT EmailAddr='' and CountryCd = 'USA' and NejmRequalifiedInd = 'Y' and WorkPlaceDesc is NOT null and RN_FLG = 'Y' and QaLead is NULL"
+        data_tags: "ActivePaidunpaidFutureStartSub-PHY_RES_RN_Y-01"
+      -
+        query: "Select TOP 11 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveOpenCreditActivatedSub' and SubTypeCd = 'OTH' and CountryCd='USA' and RN_FLG = 'Y' and QaLead is NULL"
+        data_tags: "ActiveOpenCreditActivatedSub_OTH_RN_Y"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveOpenCreditActivatedSub' and SubTypeCd = 'PHY' and NOT EmailAddr='' and CountryCd = 'USA' and NejmRequalifiedInd = 'Y' and WorkPlaceDesc is NOT null and RN_FLG = 'Y' and QaLead is null"
+        data_tags: "ActiveOpenCreditActivatedSub_RN_Y"
+      -
+        query: "Select TOP 11 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidunpaidFutureStartSub' and SubTypeCd IN ('PHY','RES') and RN_FLG = 'Y' and QaLead is NULL"
+        data_tags: "ActivePaidunpaidFutureStartSub_RN_Y"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and SubTypeCd = 'PHY' and NOT EmailAddr='' and CountryCd = 'USA' and NejmRequalifiedInd = 'Y' and WorkPlaceDesc is NOT null and RN_FLG = 'C' and QaLead is null"
+        data_tags: "InActiveBillingSuspendSub_RN_C"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'InActiveBillingSuspendSub' and SubTypeCd = 'PHY' and NOT EmailAddr='' and CountryCd = 'USA' and NejmRequalifiedInd = 'Y' and WorkPlaceDesc is NOT null and RN_FLG = 'A' and QaLead is null"
+        data_tags: "InActiveBillingSuspendSub_RN_A"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidunpaidFutureStartSub' and SubTypeCd = 'PHY' and NOT EmailAddr='' and CountryCd = 'USA' and NejmRequalifiedInd = 'Y' and WorkPlaceDesc is NOT null and RN_FLG = 'C' and QaLead is null"
+        data_tags: "ActivePaidunpaidFutureStartSub_RN_C"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActivePaidunpaidFutureStartSub' and SubTypeCd = 'PHY' and NOT EmailAddr='' and CountryCd = 'USA' and NejmRequalifiedInd = 'Y' and WorkPlaceDesc is NOT null and RN_FLG = 'A' and QaLead is null"
+        data_tags: "ActivePaidunpaidFutureStartSub_RN_A"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveOpenCreditActivatedSub' and SubTypeCd = 'PHY' and NOT EmailAddr='' and CountryCd = 'USA' and NejmRequalifiedInd = 'Y' and WorkPlaceDesc is NOT null and RN_FLG = 'C' and QaLead is null"
+        data_tags: "ActiveOpenCreditActivatedSub_RN_C"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd = 'ActiveOpenCreditActivatedSub' and SubTypeCd = 'PHY' and NOT EmailAddr='' and CountryCd = 'USA' and NejmRequalifiedInd = 'Y' and WorkPlaceDesc is NOT null and RN_FLG = 'A' and QaLead is null"
+        data_tags: "ActiveOpenCreditActivatedSub_RN_A"
+      -
+        query: "Select TOP 1 * from odl.qa.v_nejm_customers where NejmUserStatusCd IN ('ActivePaidActivatedSub', 'ActiveFreeCompRegularActivatedSub') and CapStepUp = 'Y' and SubTypeCd IN ('PHY','RES') and  CountryCd='USA' and RN_FLG='Y' and NOT EmailAddr='' and QaLead is null"
+        data_tags: "ActivePaidActivatedSub_ActiveFreeCompRegularActivatedSub-Phy_Res-USA-cY"
+
+    backed_columns:
+      -
+        header: password
+        value: q@nejm1812
+      -
+        header: id
+        value: "[TIMESTAMP]"        
